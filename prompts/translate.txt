@@ -1,0 +1,25 @@
+Translate the following passage{LANG_HINT} into fluent, accurate English. It is one section of a longer book being translated in sequence; the text just before and after it is given as context only.
+
+Rules:
+- Do NOT run any shell commands and do NOT write or edit any files. Reply with the translation only.
+- Translate everything in the PASSAGE completely and faithfully: no summarising, no omissions, no added commentary. Do not translate the CONTEXT sections.
+- Keep the Markdown structure: same paragraphs (one English paragraph per source paragraph), same heading levels (#, ##, ###), verse line breaks, emphasis.
+- Page markers look like [[p12]]. Copy every one of them exactly, unchanged, into the corresponding position in the English (between the same words/sentences as far as English word order allows). Never drop, add, renumber or merge them. A marker on a line of its own stays on a line of its own.
+- Lines ::: notes and ::: mark a block of footnotes; keep those fence lines exactly and translate the notes inside them. Keep footnote markers (¹, (1), * …) in place.
+- Romanise personal and place names in the standard scholarly system for the language (Hepburn for Japanese, Hanyu Pinyin for Chinese unless a conventional English form exists, McCune–Reischauer for Korean). Keep book/periodical titles romanised with an English gloss in square brackets the first time they occur in this passage, e.g. Chūō kōron [Central Review].
+- Keep [?] where the source has [?].
+- If something is genuinely ambiguous, choose the most plausible reading; do not add translator's notes.
+{GLOSSARY}
+=== CONTEXT BEFORE (do not translate) ===
+{CONTEXT_BEFORE}
+=== END CONTEXT BEFORE ===
+
+=== PASSAGE (translate this) ===
+{TEXT}
+=== END PASSAGE ===
+
+=== CONTEXT AFTER (do not translate) ===
+{CONTEXT_AFTER}
+=== END CONTEXT AFTER ===
+
+Output only the English translation of the PASSAGE: no preamble, no code fences.

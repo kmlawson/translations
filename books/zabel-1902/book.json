@@ -1,0 +1,45 @@
+{
+ "title": "Durch die Mandschurei und Sibirien. Reisen und Studien",
+ "author": "Rudolf Zabel",
+ "lang": "de",
+ "source": "sources/bub_gb_mi5LAAAAYAAJ/bub_gb_mi5LAAAAYAAJ.pdf",
+ "title_en": "Through Manchuria and Siberia: Travels and Studies",
+ "format_note": "The original is in the German language (Leipzig, 1902), printed in Fraktur (blackletter) type. Transcribe in ordinary Latin letters but keep the 1902 spelling exactly as printed (e.g. thun, Theil, giebt, Thür); write long s (ſ) as s and keep ß. Letter-spaced (gesperrt) words are emphasis: write them unspaced in *italics*. Words set in Roman (Antiqua) type within the Fraktur can be left as plain text. Ignore the 'Digitized by Google' watermark.",
+ "heading_rules": [
+  [
+   "^(Vorwort|Inhalt|Verzeichnis der Abbildungen|Nachweis einiger Werke)",
+   1
+  ],
+  [
+   "^Durch die Mandschurei und Sibirien",
+   1
+  ],
+  [
+   "^\\d+\\. Buch",
+   1,
+   "join"
+  ],
+  [
+   "^[IVX]+\\. Kapitel",
+   2,
+   "join"
+  ],
+  [
+   "^\\d+\\.\\s*(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)",
+   4
+  ],
+  [
+   "^\\d+\\. ",
+   3
+  ]
+ ],
+ "heading_default": 3,
+ "plain_pages": [
+  16,
+  17,
+  18,
+  19
+ ],
+ "plain_keep": "^(Inhalt|Verzeichnis der Abbildungen)",
+ "ia_identifier": "bub_gb_mi5LAAAAYAAJ"
+}

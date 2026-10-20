@@ -1,0 +1,36 @@
+You are transcribing one scanned page of a printed book{LANG_HINT}.
+
+The page image is: {IMAGE}
+(This is image {PAGE} in the sequence of page scans.)
+{FORMAT_NOTE}
+
+Look at the image yourself and transcribe exactly what is printed.
+- Do NOT run any shell commands, scripts, OCR engines (tesseract, Vision, OCR libraries) or any image-description service. Read the image with your own vision only.
+- Do NOT write or edit any files. Reply with the transcription as your answer.
+- Transcribe in the original language and script. Do not translate, modernise, correct, or summarise. Keep the original orthography (traditional/simplified, old kana, archaic spellings) as printed.
+- For vertical text, read in the correct order (columns right to left, top to bottom) and write it out horizontally.
+- One paragraph per block, separated by a blank line. Join the lines of a paragraph into one line (no hard line breaks inside a paragraph). For hyphenated line-end words in alphabetic scripts, rejoin the word.
+- Mark headings with Markdown (# for chapter titles, ## for section titles, ### for lower headings). Keep italics/bold only where clearly printed as emphasis. Keep poetry/verse line breaks with a trailing backslash on each line.
+- Transcribe only the printed page itself. Ignore anything outside the page's margins or added by the scanner/library: watermarks, digitisation stamps (e.g. HathiTrust, Google, library ownership stamps), scan rulers or colour bars, the facing page or fingers at the edge of a photo, and handwritten notes in the margins.
+- Leave out running heads (repeated book/chapter title at the top of the page) and the bare page number.
+- If a footnote marker appears in the body, keep it as printed (e.g. ¹, (1), *, 注一). Transcribe the footnotes printed at the bottom of the page after a line containing only ---notes--- , one note per line.
+- A character or word you cannot read is written [?]. Never guess.
+- If the page is blank or only an image with no text, write <<BLANK>> (and briefly describe any illustration as [Illustration: ...] instead if there is one).
+
+Output format, exactly:
+Line 1: PRINTED_PAGE: <the page number printed on the page, as printed, or none>
+Then the transcription.
+Then, as the very last line, write <<CONTINUES>> ONLY if the last paragraph of the body text is cut off mid-sentence/mid-paragraph and continues on the next page. Otherwise omit it.
+
+Example:
+PRINTED_PAGE: 23
+## 二、上海の印象
+
+上海に着いたのは三月の末であった。……
+
+それから私は¹……
+---notes---
+¹ 当時の記録による。
+<<CONTINUES>>
+
+Output nothing else: no commentary, no code fences.

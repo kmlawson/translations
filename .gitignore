@@ -1,0 +1,18 @@
+# never commit images or source scans
+*.jpg
+*.jpeg
+*.png
+*.heic
+*.HEIC
+*.tif
+*.tiff
+*.pdf
+*.webp
+books/*/pages/*
+!books/*/pages/sources.tsv
+books/*/logs/
+.backend_state.json
+__pycache__/
+.DS_Store
+sources/
+books/*/run.log

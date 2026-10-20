@@ -1,0 +1,11 @@
+body { font-family: serif; line-height: 1.55; }
+p { margin: 0; text-indent: 1.3em; text-align: justify; }
+h1 + p, h2 + p, h3 + p, .pbl + p, blockquote p, .notes p { text-indent: 0; }
+h1, h2, h3 { text-align: center; font-weight: bold; margin: 1.6em 0 .9em; }
+h2, h3 { text-align: left; }
+blockquote { margin: .8em 1.5em; }
+.notes { font-size: .85em; margin: .7em 0 1em; padding-left: .8em; border-left: 1px solid #aaa; }
+.notes p { margin: .2em 0; }
+.pb { font-size: .65em; color: #888; vertical-align: super; font-family: sans-serif; padding: 0 .15em; }
+.pb::before { content: "p."; }
+.pbl { text-align: right; margin: .3em 0 0; text-indent: 0; }
