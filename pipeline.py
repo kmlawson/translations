@@ -866,6 +866,7 @@ def cmd_build(a):
                        input=md, text=True, check=True)
         metaf.unlink()
     log(f"built {out}: " + ", ".join(sorted(f.name for f in out.iterdir() if not f.name.startswith("."))))
+    cmd_site(a)
 
 
 def cmd_clean(a):
@@ -886,6 +887,73 @@ def cmd_clean(a):
 
 
 # ---------------------------------------------------------------- status / run
+SITE_CSS = """
+:root{--bg:#fbf8f2;--fg:#24211c;--muted:#6f685c;--rule:#e6dfd2;--accent:#8a3b22;--panel:#f3eee4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1a1916;--fg:#e4dfd4;
+  --muted:#a29a8b;--rule:#34312b;--accent:#e0936f;--panel:#23211d}}
+:root[data-theme="dark"]{--bg:#1a1916;--fg:#e4dfd4;--muted:#a29a8b;--rule:#34312b;--accent:#e0936f;--panel:#23211d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.6 "Iowan Old Style",Palatino,Georgia,serif}
+main{max-width:46rem;margin:0 auto;padding:3.5rem 16px 5rem}
+a{color:var(--accent)}
+h1{font-size:2rem;margin:0 0 .3rem;font-weight:600}
+.lede{color:var(--muted);margin:0 0 2.5rem;font-size:1rem}
+.book{border-top:1px solid var(--rule);padding:1.4rem 0}
+.book h2{font-size:1.3rem;margin:0;font-weight:600;line-height:1.3}
+.book h2 a{color:var(--fg);text-decoration:none}
+.book h2 a:hover{color:var(--accent)}
+.orig{color:var(--muted);font-size:1rem;margin-top:.15rem}
+.meta{color:var(--muted);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin-top:.5rem}
+.links{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.links a{color:var(--fg);background:var(--panel);border:1px solid var(--rule);border-radius:6px;
+  padding:.25rem .6rem;text-decoration:none}
+.links a.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+footer{margin-top:3rem;color:var(--muted);font:13px -apple-system,BlinkMacSystemFont,sans-serif}
+"""
+
+
+def cmd_site(a):
+    """Root index.html listing every built book (for GitHub Pages)."""
+    items = []
+    for d in sorted(BOOKS.iterdir()):
+        out = d / "out"
+        if not (out / "index.html").exists():
+            continue
+        m = meta(d)
+        slug = d.name
+        e = html.escape
+        title_en = m.get("title_en") or m.get("title", slug)
+        pages = len(json.loads((d / "pages.json").read_text())) if (d / "pages.json").exists() else 0
+        lang = LANG_NAMES.get(m.get("lang"), m.get("lang", ""))
+        files = [("Read", "index.html", "primary")]
+        for name, label in ((f"{slug}.epub", "EPUB (English)"), (f"{slug}.en.md", "English text"),
+                            (f"{slug}.original.epub", "EPUB (original)"), (f"{slug}.original.md", "Original text"),
+                            (f"{slug}.md", "Transcription")):
+            if (out / name).exists():
+                files.append((label, name, ""))
+        links = "".join(f'<a class="{c}" href="books/{slug}/out/{f}">{e(l)}</a>' for l, f, c in files)
+        src = (f' · scan: <a href="https://archive.org/details/{e(m["ia_identifier"])}">Internet Archive</a>'
+               if m.get("ia_identifier") else "")
+        orig = f'<div class="orig">{e(m["title"])}</div>' if m.get("title") and m.get("title") != title_en else ""
+        items.append(f'<article class="book"><h2><a href="books/{slug}/out/index.html">{e(title_en)}</a></h2>{orig}'
+                     f'<div class="meta">{e(m.get("author", ""))}{" · " if m.get("author") else ""}'
+                     f'{e(lang)} · {pages} pages{src}</div><div class="links">{links}</div></article>')
+    page = f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Translated Scans</title><style>{SITE_CSS}</style></head>
+<body><main>
+<h1>Translated Scans</h1>
+<p class="lede">Books transcribed from page scans and translated into English, with the original text alongside.
+Transcription and translation are by machine (Gemini via Antigravity), so check against the scans:
+every page number in the reader links to its scan.</p>
+{"".join(items) or "<p>No books yet.</p>"}
+<footer>Built with <a href="https://github.com/kmlawson/translations">pipeline.py</a>.</footer>
+</main></body></html>
+"""
+    (ROOT / "index.html").write_text(page)
+    log(f"site index: {len(items)} book(s) -> {ROOT / 'index.html'}")
+
+
 def cmd_status(a):
     d = book_dir(a.slug)
     imgs = page_images(d)
@@ -957,6 +1025,7 @@ def main():
     common(sp.add_parser("build")).set_defaults(fn=cmd_build)
     common(sp.add_parser("status")).set_defaults(fn=cmd_status)
     common(sp.add_parser("clean")).set_defaults(fn=cmd_clean)
+    sp.add_parser("site", help="write the root index.html listing all built books").set_defaults(fn=cmd_site)
     p = common(sp.add_parser("run"), True)
     p.add_argument("--pages")
     p.add_argument("--chars", type=int)
