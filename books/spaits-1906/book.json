@@ -1,0 +1,33 @@
+{
+ "title": "Mit Kosaken durch die Mandschurei: Erlebnisse im russisch-japanischen Kriege",
+ "title_en": "With the Cossacks through Manchuria: Experiences in the Russo-Japanese War",
+ "author": "Alexander Spaits",
+ "lang": "de",
+ "ia_identifier": "mitkosakendurchd00spai",
+ "source": "sources/mitkosakendurchd00spai/mitkosakendurchd00spai.pdf",
+ "format_note": "The original is in the German language (Vienna, 1906), printed in Roman (Antiqua) type. Keep the 1906 spelling exactly as printed (e.g. Waggon, Thee, giebt). Letter-spaced (gesperrt) words are emphasis: write them unspaced in *italics*. Part title pages (e.g. 'Zum Hauptquartier der russisch-mandschurischen Armee') are # headings; chapter titles (e.g. 'Nach Petersburg.', 'Charbin.') are ## headings; a dateline under a chapter title (e.g. 'November 1904.') is a separate line in *italics*. Photographs have printed captions: write each as [Illustration: caption] on its own line between paragraphs, and do not let the photo break the paragraph text that runs around it. Ignore library stamps and the running head (e.g. 'NACH PETERSBURG.' with the page number).",
+ "heading_rules": [
+  [
+   "^(Inhalt|Mit Kosaken durch die Mandschurei)",
+   1
+  ],
+  [
+   "^(Zum Hauptquartier der russisch|Der Raid des Generals|Die Operationspause|Die Schlacht von Mukden|Nach der Schlacht)",
+   1,
+   "join"
+  ],
+  [
+   "^(Der )?\\d+\\.( und \\d+\\.)?\\s*(Januar|Februar|März)",
+   4
+  ],
+  [
+   "^(Nach Petersburg|Riga|Petersburg|Nach Mukden|Irkutsk|Transbaikal|Station Mandschuria|Charbin\\.|Der Raid nach Inkau|Die Gefechte bei Sandepu|Das Leben auf den russischen Positionen|Im Eisenbahnzug der Militärattachés|Besuch bei den Kaisergräbern|Kriegskorrespondenten|Die katholische Mission|Einleitungen zur Schlacht|Kämpfe beim zweiten sibirischen Korps|Todesverachtung|Kämpfe beim dritten sibirischen Korps|Der russische Soldat|Kämpfe beim Ostkorps|Kämpfe am östlichen Flügel|Die Kämpfe am westlichen Flügel|Inpan und der Hunh|Der Rückzug der dritten|Nach dem Rückzuge|Die Frau im Kriege|Schlußwort)",
+   2
+  ]
+ ],
+ "heading_default": 3,
+ "plain_pages": [
+  7
+ ],
+ "plain_keep": "^Inhalt"
+}

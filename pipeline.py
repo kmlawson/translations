@@ -583,9 +583,13 @@ def apply_heading_rules(blocks, m):
             t = text_of(b)
             rule = next((r for r in rules if r[0].search(t)), None)
             level = rule[1] if rule else m.get("heading_default", len(b) - len(b.lstrip("#")))
-            if (rule and rule[2] and i + 1 < len(blocks) and is_h(blocks[i + 1])
-                    and not any(r[0].search(text_of(blocks[i + 1])) for r in rules)):
-                t = t.rstrip(".") + ". " + text_of(blocks[i + 1])
+            nxt = blocks[i + 1] if i + 1 < len(blocks) else ""
+            # join the next heading, or a short subtitle line printed as text ("bis zur / Schlacht von Mukden.")
+            short = (nxt and not is_h(nxt) and len(nxt) <= 80 and not MARK_RE.search(nxt)
+                     and not nxt.startswith(("[", ":::")))
+            if rule and rule[2] and ((is_h(nxt) and not any(r[0].search(text_of(nxt)) for r in rules)) or short):
+                sub = " ".join(text_of(nxt).split())
+                t = t.rstrip(".") + (" " if short else ". ") + sub
                 i += 1
             out.append("#" * level + " " + t)
         else:
