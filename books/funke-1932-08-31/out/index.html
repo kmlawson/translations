@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japan Prepares for Geneva</title>
+<style>
+:root{
+  --bg:#fbf8f2; --fg:#24211c; --muted:#6f685c; --faint:#b9b0a1; --rule:#e6dfd2;
+  --accent:#8a3b22; --panel:#f3eee4; --mark-bg:#efe7d8;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Charter","Georgia",serif;
+  --cjk:"Hiragino Mincho ProN","Songti SC","Songti TC","Noto Serif CJK JP","Noto Serif CJK SC","Source Han Serif",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --fs:19px; --measure:38rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1a1916; --fg:#e4dfd4; --muted:#a29a8b; --faint:#5f594f; --rule:#34312b;
+    --accent:#e0936f; --panel:#23211d; --mark-bg:#2d2a24;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1a1916; --fg:#e4dfd4; --muted:#a29a8b; --faint:#5f594f; --rule:#34312b;
+  --accent:#e0936f; --panel:#23211d; --mark-bg:#2d2a24;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4rem}
+body{margin:0;background:var(--bg);color:var(--fg);font:var(--fs)/1.7 var(--serif);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--accent)}
+/* toolbar */
+.bar{position:sticky;top:0;z-index:10;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;
+  padding:.5rem 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--rule);font:14px/1.2 var(--sans)}
+.bar .t{font-weight:600;margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw}
+.bar button,.seg button{font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--rule);
+  border-radius:6px;padding:.35rem .6rem;cursor:pointer}
+.seg{display:inline-flex}
+.seg button{border-radius:0;margin-left:-1px}
+.seg button:first-child{border-radius:6px 0 0 6px}
+.seg button:last-child{border-radius:0 6px 6px 0}
+.bar button[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;background:var(--accent);width:0}
+/* title block */
+header.cover{max-width:var(--measure);margin:4rem auto 2.5rem;padding:0 16px;text-align:center}
+header.cover h1{font-size:2.1rem;line-height:1.25;margin:0 0 .4rem;font-weight:600}
+header.cover .orig-title{font-family:var(--cjk),var(--serif);color:var(--muted);font-size:1.2rem}
+header.cover .author{margin-top:.8rem;font-style:italic}
+header.cover .stats{margin-top:1.2rem;color:var(--muted);font:13px var(--sans)}
+header.cover .cite{margin-top:1rem;font-size:.9rem}
+header.cover .cite a{color:inherit}
+header.cover .cite:empty,header.cover .src:empty{display:none}
+header.cover .src{margin-top:.6rem;font:14px var(--sans)}
+header.cover .src a,footer.end a{color:var(--accent)}
+.bar a.home{font:14px var(--sans);color:var(--accent);text-decoration:none;white-space:nowrap}
+footer.end{max-width:var(--measure);margin:4rem auto 3rem;padding:1.2rem 16px 0;border-top:1px solid var(--rule);
+  color:var(--muted);font:14px var(--sans);text-align:center}
+header.cover .note{margin-top:1rem;color:var(--muted);font-size:.9rem}
+/* text */
+main{padding:0 16px 6rem}
+.row{max-width:var(--measure);margin:0 auto;position:relative}
+.en,.orig{position:relative}
+.orig{font-family:var(--cjk),var(--serif)}
+.orig p{text-align:justify}
+body[data-view="en"] .orig{display:none}
+body[data-view="en"] .untr .orig{display:block}
+body[data-view="orig"] .en{display:none}
+body[data-view="par"] .row{max-width:76rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;
+  padding:.4rem 0;border-bottom:1px dashed var(--rule)}
+body[data-view="par"]{--fs:17px}
+p{margin:0;text-indent:1.4em;hyphens:auto}
+h1+p,h2+p,h3+p,.pbl+p,blockquote p,.notes p,p:first-child{text-indent:0}
+h1,h2,h3{font-weight:600;line-height:1.3;text-indent:0}
+h1{font-size:1.6rem;margin:3.5rem 0 1.4rem;text-align:center}
+h2{font-size:1.25rem;margin:2.6rem 0 1rem}
+h3{font-size:1.05rem;margin:2rem 0 .8rem}
+blockquote{margin:1rem 1.5rem;color:var(--muted)}
+.notes{font-size:.82em;line-height:1.55;color:var(--muted);border-left:2px solid var(--rule);
+  padding:.2rem 0 .2rem .9rem;margin:.8rem 0 1rem}
+.notes p{margin:.2rem 0}
+.untr-note{color:var(--muted);font:italic 14px var(--sans)}
+/* page markers: a hairline at the seam, the number in the margin */
+.pb{text-decoration:none;color:var(--faint);font:12px/1 var(--sans);text-indent:0}
+.pb::before{content:"";display:inline-block;width:1px;height:15px;background:var(--faint);
+  vertical-align:-2px;margin:0 3px}
+.pb{font-size:0}
+.pb::after{content:attr(data-page);position:absolute;right:-4.2rem;font-size:11px;color:var(--muted);
+  background:var(--mark-bg);padding:.15rem .35rem;border-radius:4px;margin-top:.45em;white-space:nowrap}
+.pb:hover::after{color:var(--accent)}
+body[data-view="par"] .en .pb::after{right:auto;left:-3.6rem}
+body[data-view="par"] .orig .pb::after{right:-3.6rem}
+.pbl{height:0;text-indent:0}
+.pbl .pb::before{display:none}
+body.mono #viewSeg{display:none}
+body.nopages .pb,body.nopages .pbl{display:none}
+@media (max-width:960px){
+  .pb::after{position:static;margin:0 .2em;padding:.05rem .3rem}
+  body[data-view="par"] .row{grid-template-columns:1fr;gap:.8rem}
+  .pbl{height:auto;margin:.6rem 0}
+}
+/* toc drawer */
+nav.toc{position:fixed;top:0;bottom:0;left:0;width:min(22rem,88vw);z-index:20;background:var(--panel);
+  border-right:1px solid var(--rule);transform:translateX(-102%);transition:transform .2s ease;
+  overflow:auto;padding:1rem 1.2rem 3rem;font:15px/1.4 var(--sans)}
+nav.toc.open{transform:none}
+nav.toc h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:.5rem 0 1rem}
+nav.toc a{display:block;color:var(--fg);text-decoration:none;padding:.3rem 0;border-bottom:1px solid var(--rule)}
+nav.toc a.l2{padding-left:1rem;font-size:14px}
+nav.toc a.l3{padding-left:2rem;font-size:13px;color:var(--muted)}
+nav.toc .jump{display:flex;gap:.4rem;margin:0 0 1rem}
+nav.toc input{flex:1;font:inherit;padding:.3rem .5rem;border:1px solid var(--rule);border-radius:6px;
+  background:var(--bg);color:var(--fg)}
+.scrim{position:fixed;inset:0;background:#0005;z-index:15;display:none}
+.scrim.open{display:block}
+@media print{.bar,nav.toc{display:none}.pb::after{position:static}}
+</style>
+</head>
+<body data-view="en" class="">
+<div class="bar" role="toolbar">
+  <a class="home" href="../../../index.html" title="All translations">← All</a>
+  <button id="tocBtn" title="Contents">☰</button>
+  <span class="t">Japan Prepares for Geneva</span>
+  <span class="seg" id="viewSeg">
+    <button data-v="en">English</button><button data-v="orig">Original</button><button data-v="par">Parallel</button>
+  </span>
+  <button id="pgBtn" title="Show or hide page numbers">Pages</button>
+  <button id="smaller" title="Smaller text">A−</button><button id="bigger" title="Larger text">A+</button>
+  <button id="themeBtn" title="Light / dark">◐</button>
+  <div class="progress" id="prog"></div>
+</div>
+<div class="scrim" id="scrim"></div>
+<nav class="toc" id="toc" aria-label="Contents">
+  <h2>Go to page</h2>
+  <div class="jump"><input id="pgIn" placeholder="printed page, e.g. 23"><button id="pgGo">Go</button></div>
+  <h2>Contents</h2>
+  <div id="tocList"></div>
+</nav>
+<header class="cover">
+  <h1>Japan Prepares for Geneva</h1>
+  <div class="orig-title" lang="de">Japan bereitet Genf vor</div>
+  <div class="author">S. H.</div>
+  <div class="note">Der Funke was the Berlin daily of the Internationaler Sozialistischer Kampfbund (ISK). Only this article is transcribed from the newspaper page.</div>
+  <div class="cite">S. H. “Japan bereitet Genf vor.” <em>Der Funke: Tageszeitung für Recht, Freiheit und Kultur</em> (Berlin), no. 204 B, August 31, 1932, 2. Bibliothek der Friedrich-Ebert-Stiftung, <a href="https://library.fes.de/inhalt/digital/funke/pdf/1932/19320831.pdf">https://library.fes.de/inhalt/digital/funke/pdf/1932/19320831.pdf</a>.</div>
+  <div class="src">Original scan: <a href="https://library.fes.de/inhalt/digital/funke/pdf/1932/19320831.pdf#page=2">FES Library</a></div>
+  <div class="stats">1 page · 2 sections · 2 translated · transcribed and translated by machine; check against the scans (click a page number)</div>
+</header>
+<main id="text">
+<section class="row" id="c1"><div class="en" lang="en"><div class="pbl">
+<a class="pb" id="epg2" href="https://library.fes.de/inhalt/digital/funke/pdf/1932/19320831.pdf#page=2" target="_blank" title="Scan 2" data-page="2">2</a>
+</div>
+<h1 id="japan-prepares-for-geneva.">Japan Prepares for Geneva.</h1>
+<p><strong>S. H.</strong> People will have to get used to the new name “Manchukuo” for Manchuria. But one must not get used to the idea that this new name in any way guarantees or even legalizes this state’s independence from China. Under international law, Manchuria is subject to the Nine-Power Treaty of 1922, in which all signatories pledged to uphold the territorial integrity of Manchuria and the Open Door policy. Japan was a co-signatory to this treaty. The situation under international law could at most be considered doubtful if Manchuria had broken away from China independently by virtue of a <em>separatist</em> movement. The League of Nations commission was tasked with examining once again whether such an independent breakaway could even be considered—a question that, to any impartial observer, has of course long been decided against Japan.</p>
+<p>The reality is therefore that the mere fact of the Nine-Power Treaty already casts doubt on the sovereign rights of this new state. In addition, through the usurper’s role that Japan has played in Manchuria, the League of Nations has been adversely affected. For under Article 10 of its Covenant, the members of the League are obliged to respect the territorial integrity of all other member states. Since Japan and China both belong to the League of Nations, the League Council cannot be absolved of the responsibility to have the final word in this dispute.</p>
+<p>•</p>
+<p>The next session of the League of Nations is expected to take place in mid-September. By then, the report of the League of Nations commission, the so-called <em>Lytton</em> Report, will also be available, which is said to take a stand <em>against</em> Japan on the Manchurian question.</p>
+<p>It is evidently connected with this that the new Japanese Foreign Minister, <em>Uchida</em>, has taken a stance on Japan’s recognition of Manchuria just at this moment. He declared in parliament that this recognition was <em>imminent.</em> His intention in doing so was undoubtedly to present America and the League of Nations with a fait accompli.</p>
+<p><em>Uchida</em> refused to grant China any further sovereign rights over Manchuria in any form whatsoever. To the old Japanese arguments that chaotic conditions had prevailed in Manchuria, <em>Uchida</em> surprisingly added the new argument that Japan’s role in the Manchurian conflict had essentially been the exercise of a right of self-defense. This right, he claimed, was by no means limited solely to the defense of one’s own territory—a not unskillful argument! Japan can and will appeal in Geneva, as it has always been accustomed to doing, to the fact that the reinterpretation of aggression as self-defense was demonstrated to it first by most imperialist states.</p>
+<p>Regarding the employment of Japanese nationals in the new Manchurian republic, he stated that there were numerous precedents for this as well; a number of new states had requested the assistance of other countries for the development of their country, without those countries having been blamed under international law for providing the requested assistance. <em>Uchida</em> concluded by stating that the resolution of the Manchurian question could only be regarded as satisfactory by Japan if <em>the existing facts</em> were made the basis of the discussions.</p>
+<p>•</p>
+<p>With these arguments, Japan has done everything to place the League of Nations, whose power is weak enough as it is, in the most precarious position imaginable. This observation suffices to predict what feats of legal sophistry will once again be required in Geneva, especially since Britain and France throughout the entire conflict have never shown any intention of making an enemy of Japan for the sake of Manchuria. On the contrary: for the time being, both, and France in particular, have profited handsomely from the turmoil of war that Japan has ignited in Manchuria.</p>
+<p>The only effective resistance mounted against Japan so far has come from Washington. Immediately after <em>Uchida’s</em> speech became known, <em>Stimson</em> dispatched his ambassador in Tokyo to the Japanese government to learn more about the Japanese intentions. The ambassador is said to have left no doubt that the American government would officially object to Japan’s formal recognition. In response, as we have already reported, Japan immediately dispatched a peace mission in the form of a Japanese general to America.</p>
+<p>From Russia, it is reported that <em>Uchida’s</em> speech is being viewed very calmly, and that recognition of the Manchurian government is not intended. This policy of caution is consistent with Russia’s overall conduct in this turmoil, which poses a mortal danger to the Soviet Union.</p>
+<p>•</p>
+<p>Meanwhile, the policy of the Japanese in Manchuria continues to make progress. As is now confirmed, the Korean government is to transform the Manchurian port of Rashin (Rajin) into a large and modern port to compete with Vladivostok.</p>
+</div><div class="orig" lang="de"><div class="pbl">
+<a class="pb" id="opg2" href="https://library.fes.de/inhalt/digital/funke/pdf/1932/19320831.pdf#page=2" target="_blank" title="Scan 2" data-page="2">2</a>
+</div>
+<h1 id="japan-bereitet-genf-vor.">Japan bereitet Genf vor.</h1>
+<p><strong>S. H.</strong> Man wird sich an den neuen Namen „Mandschukuo“ für die Mandschurei gewöhnen müssen. Aber man wird sich nicht daran gewöhnen dürfen, als sei mit diesem neuen Namen die Unabhängigkeit dieses Staates von China garantiert oder gar legalisiert. Für die Mandschurei gilt völkerrechtlich der Neun-Mächte-Vertrag von 1922, in dem sich alle Unterzeichner verpflichtet haben, die territoriale Unversehrtheit der Mandschurei und die Politik der Offenen Tür zu wahren. Diesen Vertrag hat Japan mit unterzeichnet. Zweifelhaft könnte die völkerrechtliche Lage höchstens dann sein, wenn sich die Mandschurei kraft einer <em>separatistischen</em> Bewegung selbständig von China gelöst hätte. Die Völkerbundskommission hatte die Aufgabe, noch einmal nachzuprüfen, ob eine solche selbständige Lösung überhaupt in Frage käme — ein Problem, das freilich für jeden Unbefangenen längst zu Ungunsten Japans entschieden ist.</p>
+<p>Es liegt also so, daß allein die Tatsache des Neun-Mächte-Vertrages bereits die Souveränitätsrechte dieses neuen Staates in Zweifel zieht. Dazu kommt, daß durch die Usurpatorenrolle, die Japan in der Mandschurei gespielt hat, der Völkerbund in Mitleidenschaft gezogen ist. Denn nach Artikel 10 seiner Satzung sind die Bundesmitglieder verpflichtet, die territoriale Unverletzlichkeit aller anderen Mitgliedsstaaten zu achten. Da Japan und China beide dem Völkerbund angehören, kann der Völkerbundsrat nicht von der Verantwortung entbunden werden, das letzte Wort in diesem Streit zu sprechen.</p>
+<p>•</p>
+<p>Die nächste Völkerbundssitzung wird voraussichtlich Mitte September stattfinden. Bis dahin wird auch der Bericht der Völkerbundskommission, der sogenannte <em>Lytton</em>-Bericht, vorliegen, von dem es heißt, daß er in der mandschurischen Frage <em>gegen</em> Japan Stellung nimmt.</p>
+<p>Hiermit hängt es offensichtlich zusammen, daß der neue japanische Außenminister <em>Uschida</em> zu der Anerkennung der Mandschurei durch Japan gerade jetzt Stellung genommen hat. Er erklärte im Parlament, daß diese Anerkennung <em>unmittelbar bevorstehe.</em> Er hat zweifelsohne damit beabsichtigt, Amerika und den Völkerbund vor vollendete Tatsachen zu stellen.</p>
+<p><em>Uschida</em> lehnte es ab, China auch nur in irgend einer Form weitere Souveränitätsrechte über die Mandschurei einzuräumen. Zu den alten japanischen Gründen, es hätten in der Mandschurei chaotische Zustände geherrscht, fügte <em>Uschida</em> überraschender Weise das neue Argument hinzu, es habe sich in dem mandschurischen Konflikt bei Japan wesentlich um die Ausübung eines Selbstverteidigungsrechts gehandelt. Dieses Recht beschränke sich keineswegs nur auf die Verteidigung des eigenen Gebiets — ein nicht ungeschicktes Argument! Japan kann und wird sich in Genf darauf berufen, wie es das von jeher zu tun pflegt, daß die Umdeutung des Angriffs in die Selbstverteidigung ihm von den meisten imperialistischen Staaten vorgemacht worden sei.</p>
+<p>Zu der Einstellung von Japanern in der neuen mandschurischen Republik äußerte er, daß auch hierfür zahlreiche Präzedenzfälle vorlägen; eine Reihe neuer Staaten hätten die Hilfe anderer Länder für den Aufbau ihres Landes erbeten, ohne daß es damit diesen Ländern völkerrechtlich zum Vorwurf gemacht worden sei, wenn sie die erbetene Hilfe geleistet hätten. <em>Uschida</em> schloß damit, daß die Lösung der mandschurischen Frage von Seiten Japans nur dann als befriedigend angesehen werden könne, wenn <em>die bestehenden Tatsachen</em> zur Grundlage der Erörterungen gemacht würden.</p>
+<p>•</p>
+<p>Mit diesen Argumenten hat Japan alles getan, um den Völkerbund, dessen Macht ohnehin schwach genug ist, in eine denkbar schiefe Lage zu bringen. Diese Feststellung reicht hin, um vorauszusagen, welche Advokatenkünste in Genf wieder nötig sein werden, zumal England und Frankreich während des ganzen Konflikts nie Miene gemacht haben, sich um der Mandschurei willen mit Japan zu verfeinden. Im Gegenteil: einstweilen haben beide und insbesondere Frankreich an den Kriegswirren, die Japan in der Mandschurei entfacht hat, ausgezeichnet verdient.</p>
+<p>Der einzige wirksame Widerstand, der Japan entgegengestellt wird, geht bisher von Washington aus. <em>Stimson</em> hat sofort nach dem Bekanntwerden der Rede <em>Uschidas</em> seinen Botschafter in Tokio zur japanischen Regierung geschickt, um Näheres über die Absichten der Japaner zu erfahren. Der Botschafter soll keinen Zweifel darüber gelassen haben, daß die amerikanische Regierung gegen die förmliche Anerkennung Japans offiziell Einspruch erheben werde. Daraufhin hat, wie wir bereits gemeldet haben, Japan sofort eine Friedensmission in Gestalt eines japanischen Generals nach Amerika gesendet.</p>
+<p>Von Rußland wird gemeldet, daß man die Rede <em>Uschidas</em> sehr ruhig beurteile, eine Anerkennung der mandschurischen Regierung sei nicht beabsichtigt. Diese Politik der Vorsicht entspricht dem Gesamtverhalten Rußlands in diesen für die Sowjet-Union lebensgefährlichen Wirren.</p>
+<p>•</p>
+<p>Die Politik der Japaner in der Mandschurei nimmt inzwischen ihren Fortgang. Wie jetzt bestätigt wird, soll die koreanische Regierung den mandschurischen Hafen Raschin in einen großen und modernen Hafen umwandeln, als Konkurrenz gegen Wladiwostok.</p>
+</div></section>
+<section class="row" id="c2"><div class="en" lang="en"><p>Rashin is to be connected with Kirin by railway. This railway will serve not only economic but also strategic purposes. A total duration of 15 years has been set for the execution of the reconstruction of the port and the railway line, from which the scale of the project may be inferred. The first section of the railway is to be opened in two years.</p>
+<p>The complete organizational subjugation of Manchuria to Japan is further confirmed by the fact that Japan has dispatched a special ambassador to Manchuria in General <em>Mutō</em>, who is to take control over Japan’s military and administrative organizations in Manchuria. During his transit through Korea, an assassination attempt against him was planned. In consequence, he has been assigned a bodyguard of Japanese Guards troops, under whose protection he will arrive next Thursday in Mukden, the seat of his new post.</p>
+<p>•</p>
+<p>In the September negotiations over the Sino-Japanese conflict, there will thus be a struggle between the Japanese, who rely on the positions of power they have meanwhile acquired and fortified in Manchuria, and the League of Nations, which can entrench itself behind nothing other than the legal dugouts that it will cobble together, after a fashion, from the articles of the League Covenant and the chapters of the <em>Lytton</em> Report. Should the attack from these dugouts even prove too troublesome to the Japanese, their power politics still has one recourse: to let Geneva be Geneva, withdraw from the League of Nations, and play the individual powers off against each other without the supervision of League of Nations delegates.</p>
+</div><div class="orig" lang="de"><p>Raschin soll durch Eisenbahnen mit Kirin verbunden werden. Diese Bahn wird nicht nur wirtschaftlichen, sondern auch strategischen Zwecken dienen. Für die Durchführung des Umbaus des Hafens und der Eisenbahnlinie ist insgesamt eine Dauer von 15 Jahren angesetzt, woraus man auf die Größe des Projekts schließen kann. Die erste Teilstrecke der Eisenbahn soll in zwei Jahren eröffnet werden.</p>
+<p>Die völlige organisatorische Unterwerfung der Mandschurei unter Japan wird ferner dadurch bekräftigt, daß Japan in dem General <em>Muto</em> einen Sonderbotschafter in die Mandschurei entsandt hat, der die Kontrolle über die militärischen und behördlichen Organisationen Japans in der Mandschurei übernehmen soll. Bei seiner Durchreise durch Korea ist ein Anschlag auf ihn geplant gewesen. Daraufhin ist ihm eine Leibwache aus japanischen Gardetruppen zur Seite gegeben, unter deren Schutz er am nächsten Donnerstag in Mukden, dem Ort seiner neuen Tätigkeit, eintreffen wird.</p>
+<p>•</p>
+<p>In den Septemberverhandlungen über den japanisch-chinesischen Konflikt wird es also zu einem Kampf kommen zwischen den Japanern, die sich auf ihre inzwischen erworbenen und befestigten Machtpositionen in der Mandschurei stützen, und dem Völkerbund, der sich hinter nichts anderes verschanzen kann, als hinter die juristischen Unterstände, die er aus den Artikeln der Völkerbundsakte und den Kapiteln des <em>Lytton</em>-Berichts notdürftig zusammenhauen wird. Sollte der Angriff aus diesen Unterständen den Japanern auch noch zu lästig sein, so bleibt ihrer Machtpolitik immer noch eins: Genf Genf sein zu lassen, aus dem Völkerbund auszutreten, und die einzelnen Mächte ohne die Aufsicht von Völkerbundsdelegierten gegen einander auszuspielen.</p>
+</div></section>
+</main>
+<footer class="end"><a href="../../../index.html">← All translations</a> · <a href="https://library.fes.de/inhalt/digital/funke/pdf/1932/19320831.pdf#page=2">Original scan (FES Library)</a></footer>
+<script>
+(function(){
+  var KEY="reader-funke-1932-08-31", st={};
+  try{st=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  var root=document.documentElement, body=document.body;
+  function setView(v){body.dataset.view=v;st.view=v;save();
+    document.querySelectorAll("#viewSeg button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.v===v)});buildToc();}
+  document.querySelectorAll("#viewSeg button").forEach(function(b){b.onclick=function(){
+    var anchor=topRow(); setView(b.dataset.v); if(anchor) anchor.scrollIntoView();}});
+  function setPages(on){body.classList.toggle("nopages",!on);st.pages=on;save();
+    document.getElementById("pgBtn").setAttribute("aria-pressed",on);}
+  document.getElementById("pgBtn").onclick=function(){setPages(body.classList.contains("nopages"))};
+  function setFs(px){px=Math.max(14,Math.min(28,px));root.style.setProperty("--fs",px+"px");st.fs=px;save();}
+  document.getElementById("smaller").onclick=function(){setFs((st.fs||19)-1)};
+  document.getElementById("bigger").onclick=function(){setFs((st.fs||19)+1)};
+  document.getElementById("themeBtn").onclick=function(){
+    var dark=root.dataset.theme? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme=dark?"light":"dark";st.theme=root.dataset.theme;save();};
+  // contents
+  var toc=document.getElementById("toc"), scrim=document.getElementById("scrim");
+  function openToc(o){toc.classList.toggle("open",o);scrim.classList.toggle("open",o)}
+  document.getElementById("tocBtn").onclick=function(){openToc(!toc.classList.contains("open"))};
+  scrim.onclick=function(){openToc(false)};
+  function buildToc(){
+    var sel=body.dataset.view==="orig"?".orig":".en", list=document.getElementById("tocList"), n=0;
+    list.innerHTML="";
+    document.querySelectorAll(sel+" h1,"+sel+" h2,"+sel+" h3").forEach(function(h){
+      if(!h.id) h.id="h"+(++n)+sel.slice(1);
+      var a=document.createElement("a");a.href="#"+h.id;a.className="l"+h.tagName[1];
+      a.textContent=h.textContent;a.onclick=function(){openToc(false)};list.appendChild(a);});
+    if(!list.children.length) list.innerHTML='<p style="color:var(--muted)">No headings.</p>';
+  }
+  // go to printed page
+  function goPage(){var v=document.getElementById("pgIn").value.trim(); if(!v) return;
+    var sel=body.dataset.view==="orig"?".orig":".en";
+    var t=document.querySelector(sel+' .pb[data-page="'+v+'"]')||document.querySelector('.pb[data-page="'+v+'"]')
+      ||document.querySelector(sel+' .pb[data-page="['+v+']"]');
+    if(t){openToc(false);if(body.classList.contains("nopages"))setPages(true);
+      t.scrollIntoView({block:"center"});}
+    else alert("Page "+v+" not found");}
+  document.getElementById("pgGo").onclick=goPage;
+  document.getElementById("pgIn").onkeydown=function(e){if(e.key==="Enter")goPage()};
+  // reading position + progress
+  var rows=[].slice.call(document.querySelectorAll(".row"));
+  function topRow(){for(var i=0;i<rows.length;i++){if(rows[i].getBoundingClientRect().bottom>80) return rows[i];}return null}
+  var prog=document.getElementById("prog"), tick=false;
+  addEventListener("scroll",function(){if(tick)return;tick=true;requestAnimationFrame(function(){tick=false;
+    var h=document.documentElement.scrollHeight-innerHeight; prog.style.width=(h>0?scrollY/h*100:0)+"%";
+    var r=topRow(); if(r&&r.id!==st.pos){st.pos=r.id;save();}});},{passive:true});
+  var qv=null;try{qv=new URLSearchParams(location.search).get("view")}catch(e){}
+  setView(body.classList.contains("mono")?"en":/^(en|orig|par)$/.test(qv||"")?qv:(st.view||"en")); setPages(st.pages!==false); if(st.fs) setFs(st.fs); if(st.theme) root.dataset.theme=st.theme;
+  if(!location.hash && st.pos){var r=document.getElementById(st.pos); if(r && r!==rows[0]) r.scrollIntoView();}
+})();
+</script>
+</body>
+</html>

@@ -2,6 +2,8 @@
 
 *Alexander Spaits*
 
+Original scan (Internet Archive): https://archive.org/details/mitkosakendurchd00spai
+
 Page references in braces, e.g. {p. 23}, mark where each printed page begins.
 
 {p. [1]}

@@ -2,6 +2,8 @@
 
 *Rudolf Zabel*
 
+Original scan (Internet Archive): https://archive.org/details/bub_gb_mi5LAAAAYAAJ
+
 Page references in braces, e.g. {p. 23}, mark where each printed page begins.
 
 {p. [1]}

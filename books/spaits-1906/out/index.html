@@ -47,6 +47,14 @@ header.cover h1{font-size:2.1rem;line-height:1.25;margin:0 0 .4rem;font-weight:6
 header.cover .orig-title{font-family:var(--cjk),var(--serif);color:var(--muted);font-size:1.2rem}
 header.cover .author{margin-top:.8rem;font-style:italic}
 header.cover .stats{margin-top:1.2rem;color:var(--muted);font:13px var(--sans)}
+header.cover .cite{margin-top:1rem;font-size:.9rem}
+header.cover .cite a{color:inherit}
+header.cover .cite:empty,header.cover .src:empty{display:none}
+header.cover .src{margin-top:.6rem;font:14px var(--sans)}
+header.cover .src a,footer.end a{color:var(--accent)}
+.bar a.home{font:14px var(--sans);color:var(--accent);text-decoration:none;white-space:nowrap}
+footer.end{max-width:var(--measure);margin:4rem auto 3rem;padding:1.2rem 16px 0;border-top:1px solid var(--rule);
+  color:var(--muted);font:14px var(--sans);text-align:center}
 header.cover .note{margin-top:1rem;color:var(--muted);font-size:.9rem}
 /* text */
 main{padding:0 16px 6rem}
@@ -86,7 +94,6 @@ body[data-view="par"] .orig .pb::after{right:-3.6rem}
 body.mono #viewSeg{display:none}
 body.nopages .pb,body.nopages .pbl{display:none}
 @media (max-width:960px){
-  .pb{font-size:11px}
   .pb::after{position:static;margin:0 .2em;padding:.05rem .3rem}
   body[data-view="par"] .row{grid-template-columns:1fr;gap:.8rem}
   .pbl{height:auto;margin:.6rem 0}
@@ -110,6 +117,7 @@ nav.toc input{flex:1;font:inherit;padding:.3rem .5rem;border:1px solid var(--rul
 </head>
 <body data-view="en" class="">
 <div class="bar" role="toolbar">
+  <a class="home" href="../../../index.html" title="All translations">← All</a>
   <button id="tocBtn" title="Contents">☰</button>
   <span class="t">With the Cossacks through Manchuria: Experiences in the Russo-Japanese War</span>
   <span class="seg" id="viewSeg">
@@ -132,6 +140,8 @@ nav.toc input{flex:1;font:inherit;padding:.3rem .5rem;border:1px solid var(--rul
   <div class="orig-title" lang="de">Mit Kosaken durch die Mandschurei: Erlebnisse im russisch-japanischen Kriege</div>
   <div class="author">Alexander Spaits</div>
   <div class="note"></div>
+  <div class="cite"></div>
+  <div class="src">Original scan: <a href="https://archive.org/details/mitkosakendurchd00spai">Internet Archive</a></div>
   <div class="stats">382 pages · 114 sections · 114 translated · transcribed and translated by machine; check against the scans (click a page number)</div>
 </header>
 <main id="text">
@@ -3918,6 +3928,7 @@ Inpan und der Hunhó werden aufgegeben. — Der Rückzug der dritten und zweiten
 </div>
 </div></section>
 </main>
+<footer class="end"><a href="../../../index.html">← All translations</a> · <a href="https://archive.org/details/mitkosakendurchd00spai">Original scan (Internet Archive)</a></footer>
 <script>
 (function(){
   var KEY="reader-spaits-1906", st={};

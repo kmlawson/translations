@@ -814,6 +814,9 @@ def cmd_build(a):
 
     title, author = m.get("title", a.slug), m.get("author", "")
     cite = f"Source: {m['citation']}\n\n" if m.get("citation") else ""
+    src_url, src_label = original_url(m)
+    if src_url and src_url.split("#")[0] not in cite:
+        cite += f"Original scan ({src_label}): {src_url}\n\n"
     head = f"# {title}\n\n" + (f"*{author}*\n\n" if author else "") + cite
     note = "Page references in braces, e.g. {p. 23}, mark where each printed page begins.\n\n"
     (out / f"{a.slug}{'' if mono else '.original'}.md").write_text(
@@ -848,6 +851,10 @@ def cmd_build(a):
             .replace("{{LANG}}", html.escape(m.get("lang", "")))
             .replace("{{NOTE}}", cite_html({"citation": m.get("note", "")}))
             .replace("{{CITATION}}", cite_html(m))
+            .replace("{{SOURCE}}", f'Original scan: <a href="{html.escape(src_url)}">{html.escape(src_label)}</a>'
+                     if src_url else "")
+            .replace("{{SOURCE_FOOT}}", f' · <a href="{html.escape(src_url)}">Original scan ({html.escape(src_label)})</a>'
+                     if src_url else "")
             .replace("{{SLUG}}", html.escape(a.slug))
             .replace("{{BODYCLASS}}", "mono" if mono else "")
             .replace("{{STATS}}", f"{npages} page{"s" if npages != 1 else ""} · transcribed by machine; check against the scans "
@@ -872,6 +879,8 @@ def cmd_build(a):
         if m.get("citation"):
             md_meta["description"] = m["citation"].replace("*", "")
             md = f"*Source:* {m['citation']}\n\n" + md
+        elif src_url:
+            md = f"*Original scan ({src_label}):* <{src_url}>\n\n" + md
         metaf.write_text(json.dumps(md_meta, ensure_ascii=False))
         target = out / f"{a.slug}{'' if kind == 'en' else '.original'}.epub"
         has_h1 = re.search(r"(?m)^# ", md)
@@ -929,6 +938,15 @@ footer{margin-top:3rem;color:var(--muted);font:13px -apple-system,BlinkMacSystem
 """
 
 
+def original_url(m):
+    """(URL, label) of the original scan's public location, or (None, None)."""
+    if m.get("ia_identifier"):
+        return f"https://archive.org/details/{m['ia_identifier']}", "Internet Archive"
+    if m.get("scan_url") or m.get("scan_urls"):
+        return m.get("scan_url") or next(iter(m["scan_urls"].values())), m.get("scan_label", "original")
+    return None, None
+
+
 def cite_html(m):
     """book.json "citation" (Markdown *italics* allowed; URLs become links) -> HTML."""
     c = html.escape(m.get("citation", ""))
@@ -959,9 +977,9 @@ def cmd_site(a):
         links = "".join(f'<a class="{c}" href="books/{slug}/out/{f}">{e(l)}</a>' for l, f, c in files)
         src = (f' · scan: <a href="https://archive.org/details/{e(m["ia_identifier"])}">Internet Archive</a>'
                if m.get("ia_identifier") else "")
-        if not src and (m.get("scan_url") or m.get("scan_urls")):
-            u = m.get("scan_url") or next(iter(m["scan_urls"].values()))
-            src = f' · scan: <a href="{e(u)}">{e(m.get("scan_label", "original"))}</a>'
+        if not src and original_url(m)[0]:
+            u, lab = original_url(m)
+            src = f' · scan: <a href="{e(u)}">{e(lab)}</a>'
         cite = f'<div class="cite">{cite_html(m)}</div>' if m.get("citation") else ""
         orig = f'<div class="orig">{e(m["title"])}</div>' if m.get("title") and m.get("title") != title_en else ""
         items.append(f'<article class="book"><h2><a href="books/{slug}/out/index.html">{e(title_en)}</a></h2>{orig}'
