@@ -750,6 +750,11 @@ def scan_links(d, m):
             n = int(k)
             links[n] = f"https://archive.org/details/{m['ia_identifier']}/page/n{n - 1}/mode/1up"
         return links
+    if m.get("scan_url") or m.get("scan_urls"):    # other public scan (e.g. a library viewer)
+        per = m.get("scan_urls", {})
+        for k in json.loads((d / "pages.json").read_text()) if (d / "pages.json").exists() else []:
+            links[int(k)] = per.get(str(k), m.get("scan_url"))
+        return links
     src = Path(m.get("source") or m.get("source_pdf") or "")
     if not src.is_absolute():
         src = ROOT / src
@@ -808,7 +813,8 @@ def cmd_build(a):
         log(f"warning: {len(missing)} chunk(s) untranslated: {missing[:10]} — shown as original only")
 
     title, author = m.get("title", a.slug), m.get("author", "")
-    head = f"# {title}\n\n" + (f"*{author}*\n\n" if author else "")
+    cite = f"Source: {m['citation']}\n\n" if m.get("citation") else ""
+    head = f"# {title}\n\n" + (f"*{author}*\n\n" if author else "") + cite
     note = "Page references in braces, e.g. {p. 23}, mark where each printed page begins.\n\n"
     (out / f"{a.slug}{'' if mono else '.original'}.md").write_text(
         head + note + markers_md("\n\n".join(orig), pmap) + "\n")
@@ -816,7 +822,7 @@ def cmd_build(a):
     if not mono:
         en_md = "\n\n".join(e if e else "> [untranslated]\n\n" + o for e, o in zip(en, orig))
         (out / f"{a.slug}.en.md").write_text(f"# {en_title}\n\n" + (f"*{author}*\n\n" if author else "")
-                                             + note + markers_md(en_md, pmap) + "\n")
+                                             + cite + note + markers_md(en_md, pmap) + "\n")
 
     # ---- HTML: convert all chunks in one pandoc call, each wrapped in a fenced div
     def conv(texts, cls):
@@ -834,17 +840,19 @@ def cmd_build(a):
         orig_div = "" if mono else f'<div class="orig" lang="{html.escape(m.get("lang", ""))}">{oh}</div>'
         rows.append(f'<section class="{cls}" id="c{i}"><div class="en" lang="en">'
                     f'{eh or "<p class=untr-note>[not yet translated]</p>"}</div>{orig_div}</section>')
+    npages = len(pmap) or len(page_images(d))
     tpl = (ROOT / "template.html").read_text()
     page = (tpl.replace("{{TITLE}}", html.escape(en_title))
             .replace("{{TITLE_ORIG}}", html.escape(title) if title != en_title else "")
             .replace("{{AUTHOR}}", html.escape(author))
             .replace("{{LANG}}", html.escape(m.get("lang", "")))
-            .replace("{{NOTE}}", html.escape(m.get("note", "")))
+            .replace("{{NOTE}}", cite_html({"citation": m.get("note", "")}))
+            .replace("{{CITATION}}", cite_html(m))
             .replace("{{SLUG}}", html.escape(a.slug))
             .replace("{{BODYCLASS}}", "mono" if mono else "")
-            .replace("{{STATS}}", f"{len(pmap) or len(page_images(d))} pages · transcribed by machine; check against the scans "
+            .replace("{{STATS}}", f"{npages} page{"s" if npages != 1 else ""} · transcribed by machine; check against the scans "
                                   "(click a page number)" if mono else
-                     f"{len(pmap) or len(page_images(d))} pages · {len(chunks)} sections · {len(chunks) - len(missing)} "
+                     f"{npages} page{"s" if npages != 1 else ""} · {len(chunks)} sections · {len(chunks) - len(missing)} "
                      "translated · transcribed and translated by machine; check against the scans "
                      "(click a page number)")
             .replace("{{BODY}}", "\n".join(rows)))
@@ -861,6 +869,9 @@ def cmd_build(a):
         md_meta = {"title": ttl, "lang": lang, "date": time.strftime("%Y-%m-%d")}
         if author:
             md_meta["creator"] = author
+        if m.get("citation"):
+            md_meta["description"] = m["citation"].replace("*", "")
+            md = f"*Source:* {m['citation']}\n\n" + md
         metaf.write_text(json.dumps(md_meta, ensure_ascii=False))
         target = out / f"{a.slug}{'' if kind == 'en' else '.original'}.epub"
         has_h1 = re.search(r"(?m)^# ", md)
@@ -907,6 +918,8 @@ h1{font-size:2rem;margin:0 0 .3rem;font-weight:600}
 .book h2 a{color:var(--fg);text-decoration:none}
 .book h2 a:hover{color:var(--accent)}
 .orig{color:var(--muted);font-size:1rem;margin-top:.15rem}
+.cite{color:var(--muted);font-size:.92rem;margin-top:.4rem}
+.cite a{color:inherit}
 .meta{color:var(--muted);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin-top:.5rem}
 .links{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 .links a{color:var(--fg);background:var(--panel);border:1px solid var(--rule);border-radius:6px;
@@ -914,6 +927,14 @@ h1{font-size:2rem;margin:0 0 .3rem;font-weight:600}
 .links a.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
 footer{margin-top:3rem;color:var(--muted);font:13px -apple-system,BlinkMacSystemFont,sans-serif}
 """
+
+
+def cite_html(m):
+    """book.json "citation" (Markdown *italics* allowed; URLs become links) -> HTML."""
+    c = html.escape(m.get("citation", ""))
+    c = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", c)
+    c = re.sub(r"(https?://[^\s<]+?)([.,;)]?(?:\s|$))", r'<a href="\1">\1</a>\2', c)
+    return c
 
 
 def cmd_site(a):
@@ -938,10 +959,14 @@ def cmd_site(a):
         links = "".join(f'<a class="{c}" href="books/{slug}/out/{f}">{e(l)}</a>' for l, f, c in files)
         src = (f' · scan: <a href="https://archive.org/details/{e(m["ia_identifier"])}">Internet Archive</a>'
                if m.get("ia_identifier") else "")
+        if not src and (m.get("scan_url") or m.get("scan_urls")):
+            u = m.get("scan_url") or next(iter(m["scan_urls"].values()))
+            src = f' · scan: <a href="{e(u)}">{e(m.get("scan_label", "original"))}</a>'
+        cite = f'<div class="cite">{cite_html(m)}</div>' if m.get("citation") else ""
         orig = f'<div class="orig">{e(m["title"])}</div>' if m.get("title") and m.get("title") != title_en else ""
         items.append(f'<article class="book"><h2><a href="books/{slug}/out/index.html">{e(title_en)}</a></h2>{orig}'
                      f'<div class="meta">{e(m.get("author", ""))}{" · " if m.get("author") else ""}'
-                     f'{e(lang)} · {pages} pages{src}</div><div class="links">{links}</div></article>')
+                     f'{e(lang)} · {pages} page{"s" if pages != 1 else ""}{src}</div>{cite}<div class="links">{links}</div></article>')
     page = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Translated Scans</title><style>{SITE_CSS}</style></head>

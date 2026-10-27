@@ -1,0 +1,33 @@
+[[p1]]
+
+# Zwischenfall in einer mandschurischen Mädchenschule.
+
+## „Dieser Mann wollte mich ermorden!“ – Es war nur ein Mißverständnis. Nichts Besonderes in Mandschukuo.
+
+*Von A. R. Lindt.*
+
+Der Schulmeister der Stadt, ein langhaariger Jüngling in blauem Rock, dem ein nagelneuer Strohhut westlicher Herkunft einen europäischen Anstrich verlieh, bat uns inständig, seine Schule zu besuchen. Diese, gleich jedem anderen Gebäude, war beschützt durch einen hohen Lehmwall. Im Hofe spielten Knaben eine Art Tennis.
+
+„Das sportliche Erwachen Chinas ist Voraussetzung für seine nationale Erneuerung“, dozierte der Lehrer, bevor er uns in die Schulräume führte, deren Erdwände kahl und deren Fenster mit Pergament verklebt waren. Die Pulte waren dieselben wie in jeder Landschule Europas. Ein Stundenplan bestimmte, wieviel Zeit die unglückseligen chinesischen Schüler auf das Erlernen der sechstausend Schriftzeichen zu verwenden hatten, deren Kenntnis nötig ist, um wenigstens eine Zeitung lesen zu können. (Damit sie aber ein klassisches Gedicht verstehen können, müßten sie dreißigtausend Schriftzeichen beherrschen.) Der Unterricht umfaßte auch die Geschichte der nationalistischen Partei der Kuomintang und die berühmten drei Grundsätze des Doktor Sun Yat-Sen. In jedem Zimmer hing als einziger Schmuck sein Bildnis, das immer mehr die alten Götterbilder verdrängend, auch im Jamen jedes Mandarins zu finden ist. Ich sah es sogar in einsamen Gehöften neben dem Familienaltare.
+
+Ein junges Mädchen hatte sich uns schüchtern genähert. Der Lehrer stellte es vor als die Vorsteherin der Mädchenschule und fügte bei, ob sie es wagen dürfte, uns um unsern Besuch zu bitten. Die Räume der Mädchenschule waren eng, die zerbrochenen Pulte ineinander gepfercht, und das Pergament der Fenster hing in Fetzen herunter. Die Stadtväter waren wenig geneigt, Geld an die Ausbildung von Mädchen zu vergeuden. Die Vorsteherin machte uns in ihrem ordentlichen, sauberen Wohnzimmer mit ihren Gehilfinnen bekannt, die ebenfalls nicht in Hosen – wie es sich für Frauen auf dem Lande ziemt –, sondern in Röcke gekleidet waren. Sie sprachen voll Feuer von ihrem Kampf gegen die gebundenen Füße.
+
+„Wie soll sich eine Frau, die sich nur mühsam auf Stelzen fortbewegen kann, für die Gleichberechtigung der Geschlechter einsetzen? Wie kann . . .“
+
+Geschrei unterbrach sie. Die Tür sprang auf. Der Schulmeister stürzte sich mit einem Satz auf den Eindringling. Teetassen klirrten zu Boden. Frauen und Kinder kreischten. Schwer atmend rangen die beiden Männer. Schließlich gelang es dem Schulmeister, beide Arme des Gegners zu umklammern, der sich auch jetzt noch mit seinen Füßen zu wehren suchte. Es war ein Soldat. Seine Mütze lag am Boden und ein Messer zu seinen Füßen. Man hob es auf.
+
+„Dieser Mann“, sagte er mit dem Lächeln, das jede seiner Reden begleitete, „wollte euch ermorden.“
+
+Der Schulmeister gab den Soldaten frei, der verlegen seine Mütze aufsetzte und sein Messer zurückerbat. Er verbeugte sich tief vor uns.
+
+„Er hielt euch für Japaner. Jetzt, wo er sieht, daß ihr weiße Männer seid, bittet er euch um Entschuldigung.“
+
+Die Lehrerinnen brachten neue Teetassen.
+
+„Wenn ihr nur endlich einmal eure braunen Windjacken verbrennen würdet“, sagte Han.
+
+Als der Schulmeister uns zum Jamen zurückgeleitete, legte er mit Begeisterung sein nationalistisches Glaubensbekenntnis ab. Im modernen China hat der Intellektuelle selten Zugang zur Macht. Und doch erlangt eine intellektuelle Berufsklasse in steigendem Maße Einfluß auf die Geschicke Chinas und vollbringt es, allmählich die alteingewurzelten Auffassungen und Gebräuche zu verändern. Es ist die Klasse des schlecht bezahlten, wenig angesehenen Schullehrers, wie er sich in den meisten Dörfern und als Angestellter der Familie in großen Gehöften findet. Kaum der Universität entwachsen, den Kopf angefüllt mit großen Plänen für die Erneuerung Chinas, predigt er den Bauernkindern, daß China eine Nation ist, der sowohl Charbin wie Kanton angehören. Er schildert ihnen, wie untragbar die Vorrechte der Fremden seien und überzeugt sie, daß es die Pflicht der Jugend ist, die einseitigen Verträge mit den Ausländern wie einen Papierfetzen zu zerreißen. Den Lehren Sun Yat-Sens folgend, die er vielleicht selbst nicht vollständig verstanden hat, will er die chinesischen Massen, die sich darein geschickt haben, daß Politik sie nichts angeht, zu nationalem Bewußtsein erwecken. Er schafft die öffentliche Meinung, trotz dem Argwohn der Alten, indem er sich auf die Jugend stützt. Jeden Zwischenfall mit einem ausländischen Staat macht er erst den Leuten verständlich. Er weiß die Abneigung, die die Bauern allem Fremden gegenüber verspüren, in Haß zu verwandeln. Als Japan in die Mandschurei einrückte, war es der Schullehrer, der die gleichgültigen Bauern und die furchtsamen Krämer zum Widerstand zu entflammen versuchte. Trotzdem die neuen Herrscher der Mandschurei ein Verbot an alle Schulen erlassen haben, weiterhin die Lehren Sun Yat-Sens zu verbreiten, und ihnen gebieten, statt der Geschichte der Kuomintang die Geschichte des Kaiserhauses des Mandschu und das Leben Pu Yis zu unterrichten, fährt der kleine Schulmeister fort, den Haß gegen Japan zu predigen. Er ist der heftigste Feind des neuen Staates Mandschukuo, gefährlicher als die aufständischen Generäle.
+
+Als unsere neuen Pferde bereitstanden, beschenkte uns der Gildenmeister der Kaufleute mit zwei Konservenbüchsen: Die Pfirsiche trugen den Vermerk: Made in U. S. A., und die Fische stammten aus Japan.
+
+Die Hügel duckten sich wieder in die Ebene zurück, dem Himmel Raum schaffend. (Mit besonderer Genehmigung des Verlages F. A. Brockhaus, Leipzig, dem soeben erschienenen Buch „Im Sattel durch Mandschukuo“ von A. R. Lindt, entnommen.)

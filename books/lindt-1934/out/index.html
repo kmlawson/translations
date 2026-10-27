@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Incident at a Manchurian Girls’ School</title>
+<style>
+:root{
+  --bg:#fbf8f2; --fg:#24211c; --muted:#6f685c; --faint:#b9b0a1; --rule:#e6dfd2;
+  --accent:#8a3b22; --panel:#f3eee4; --mark-bg:#efe7d8;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Charter","Georgia",serif;
+  --cjk:"Hiragino Mincho ProN","Songti SC","Songti TC","Noto Serif CJK JP","Noto Serif CJK SC","Source Han Serif",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --fs:19px; --measure:38rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1a1916; --fg:#e4dfd4; --muted:#a29a8b; --faint:#5f594f; --rule:#34312b;
+    --accent:#e0936f; --panel:#23211d; --mark-bg:#2d2a24;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1a1916; --fg:#e4dfd4; --muted:#a29a8b; --faint:#5f594f; --rule:#34312b;
+  --accent:#e0936f; --panel:#23211d; --mark-bg:#2d2a24;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4rem}
+body{margin:0;background:var(--bg);color:var(--fg);font:var(--fs)/1.7 var(--serif);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--accent)}
+/* toolbar */
+.bar{position:sticky;top:0;z-index:10;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;
+  padding:.5rem 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--rule);font:14px/1.2 var(--sans)}
+.bar .t{font-weight:600;margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw}
+.bar button,.seg button{font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--rule);
+  border-radius:6px;padding:.35rem .6rem;cursor:pointer}
+.seg{display:inline-flex}
+.seg button{border-radius:0;margin-left:-1px}
+.seg button:first-child{border-radius:6px 0 0 6px}
+.seg button:last-child{border-radius:0 6px 6px 0}
+.bar button[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;background:var(--accent);width:0}
+/* title block */
+header.cover{max-width:var(--measure);margin:4rem auto 2.5rem;padding:0 16px;text-align:center}
+header.cover h1{font-size:2.1rem;line-height:1.25;margin:0 0 .4rem;font-weight:600}
+header.cover .orig-title{font-family:var(--cjk),var(--serif);color:var(--muted);font-size:1.2rem}
+header.cover .author{margin-top:.8rem;font-style:italic}
+header.cover .stats{margin-top:1.2rem;color:var(--muted);font:13px var(--sans)}
+header.cover .cite{margin-top:1rem;font-size:.9rem}
+header.cover .cite a{color:inherit}
+header.cover .cite:empty{display:none}
+header.cover .note{margin-top:1rem;color:var(--muted);font-size:.9rem}
+/* text */
+main{padding:0 16px 6rem}
+.row{max-width:var(--measure);margin:0 auto;position:relative}
+.en,.orig{position:relative}
+.orig{font-family:var(--cjk),var(--serif)}
+.orig p{text-align:justify}
+body[data-view="en"] .orig{display:none}
+body[data-view="en"] .untr .orig{display:block}
+body[data-view="orig"] .en{display:none}
+body[data-view="par"] .row{max-width:76rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;
+  padding:.4rem 0;border-bottom:1px dashed var(--rule)}
+body[data-view="par"]{--fs:17px}
+p{margin:0;text-indent:1.4em;hyphens:auto}
+h1+p,h2+p,h3+p,.pbl+p,blockquote p,.notes p,p:first-child{text-indent:0}
+h1,h2,h3{font-weight:600;line-height:1.3;text-indent:0}
+h1{font-size:1.6rem;margin:3.5rem 0 1.4rem;text-align:center}
+h2{font-size:1.25rem;margin:2.6rem 0 1rem}
+h3{font-size:1.05rem;margin:2rem 0 .8rem}
+blockquote{margin:1rem 1.5rem;color:var(--muted)}
+.notes{font-size:.82em;line-height:1.55;color:var(--muted);border-left:2px solid var(--rule);
+  padding:.2rem 0 .2rem .9rem;margin:.8rem 0 1rem}
+.notes p{margin:.2rem 0}
+.untr-note{color:var(--muted);font:italic 14px var(--sans)}
+/* page markers: a hairline at the seam, the number in the margin */
+.pb{text-decoration:none;color:var(--faint);font:12px/1 var(--sans);text-indent:0}
+.pb::before{content:"";display:inline-block;width:1px;height:15px;background:var(--faint);
+  vertical-align:-2px;margin:0 3px}
+.pb{font-size:0}
+.pb::after{content:attr(data-page);position:absolute;right:-4.2rem;font-size:11px;color:var(--muted);
+  background:var(--mark-bg);padding:.15rem .35rem;border-radius:4px;margin-top:.45em;white-space:nowrap}
+.pb:hover::after{color:var(--accent)}
+body[data-view="par"] .en .pb::after{right:auto;left:-3.6rem}
+body[data-view="par"] .orig .pb::after{right:-3.6rem}
+.pbl{height:0;text-indent:0}
+.pbl .pb::before{display:none}
+body.mono #viewSeg{display:none}
+body.nopages .pb,body.nopages .pbl{display:none}
+@media (max-width:960px){
+  .pb{font-size:11px}
+  .pb::after{position:static;margin:0 .2em;padding:.05rem .3rem}
+  body[data-view="par"] .row{grid-template-columns:1fr;gap:.8rem}
+  .pbl{height:auto;margin:.6rem 0}
+}
+/* toc drawer */
+nav.toc{position:fixed;top:0;bottom:0;left:0;width:min(22rem,88vw);z-index:20;background:var(--panel);
+  border-right:1px solid var(--rule);transform:translateX(-102%);transition:transform .2s ease;
+  overflow:auto;padding:1rem 1.2rem 3rem;font:15px/1.4 var(--sans)}
+nav.toc.open{transform:none}
+nav.toc h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:.5rem 0 1rem}
+nav.toc a{display:block;color:var(--fg);text-decoration:none;padding:.3rem 0;border-bottom:1px solid var(--rule)}
+nav.toc a.l2{padding-left:1rem;font-size:14px}
+nav.toc a.l3{padding-left:2rem;font-size:13px;color:var(--muted)}
+nav.toc .jump{display:flex;gap:.4rem;margin:0 0 1rem}
+nav.toc input{flex:1;font:inherit;padding:.3rem .5rem;border:1px solid var(--rule);border-radius:6px;
+  background:var(--bg);color:var(--fg)}
+.scrim{position:fixed;inset:0;background:#0005;z-index:15;display:none}
+.scrim.open{display:block}
+@media print{.bar,nav.toc{display:none}.pb::after{position:static}}
+</style>
+</head>
+<body data-view="en" class="">
+<div class="bar" role="toolbar">
+  <button id="tocBtn" title="Contents">☰</button>
+  <span class="t">Incident at a Manchurian Girls’ School</span>
+  <span class="seg" id="viewSeg">
+    <button data-v="en">English</button><button data-v="orig">Original</button><button data-v="par">Parallel</button>
+  </span>
+  <button id="pgBtn" title="Show or hide page numbers">Pages</button>
+  <button id="smaller" title="Smaller text">A−</button><button id="bigger" title="Larger text">A+</button>
+  <button id="themeBtn" title="Light / dark">◐</button>
+  <div class="progress" id="prog"></div>
+</div>
+<div class="scrim" id="scrim"></div>
+<nav class="toc" id="toc" aria-label="Contents">
+  <h2>Go to page</h2>
+  <div class="jump"><input id="pgIn" placeholder="printed page, e.g. 23"><button id="pgGo">Go</button></div>
+  <h2>Contents</h2>
+  <div id="tocList"></div>
+</nav>
+<header class="cover">
+  <h1>Incident at a Manchurian Girls’ School</h1>
+  <div class="orig-title" lang="de">Zwischenfall in einer mandschurischen Mädchenschule</div>
+  <div class="author">A. R. Lindt</div>
+  <div class="note">Excerpted, as the paper notes, from A. R. Lindt, <em>Im Sattel durch Mandschukuo</em> (Leipzig: F. A. Brockhaus, 1934). Only this article is transcribed from the newspaper page.</div>
+  <div class="cite">Lindt, A. R. “Zwischenfall in einer mandschurischen Mädchenschule: ‘Dieser Mann wollte mich ermorden!’ – Es war nur ein Mißverständnis. Nichts Besonderes in Mandschukuo.” <em>Darmstädter Tagblatt / Hessische Neueste Nachrichten</em>, no. 308, November 7, 1934, 10. Universitäts- und Landesbibliothek Darmstadt, <a href="https://tudigit.ulb.tu-darmstadt.de/show/Za-150-1934-4/0486">https://tudigit.ulb.tu-darmstadt.de/show/Za-150-1934-4/0486</a>.</div>
+  <div class="stats">1 page · 2 sections · 2 translated · transcribed and translated by machine; check against the scans (click a page number)</div>
+</header>
+<main id="text">
+<section class="row" id="c1"><div class="en" lang="en"><div class="pbl">
+<a class="pb" id="epg1" href="https://tudigit.ulb.tu-darmstadt.de/show/Za-150-1934-4/0486" target="_blank" title="Scan 1" data-page="10">10</a>
+</div>
+<h1 id="incident-in-a-manchurian-girls-school.">Incident in a Manchurian Girls’ School.</h1>
+<h2 id="this-man-wanted-to-murder-meit-was-only-a-misunderstanding.-nothing-unusual-in-manchukuo.">“This man wanted to murder me!”—It was only a misunderstanding. Nothing unusual in Manchukuo.</h2>
+<p><em>By A. R. Lindt.</em></p>
+<p>The town’s schoolmaster, a long-haired youth in a blue gown, to whom a brand-new straw hat of Western origin lent a European air, implored us to visit his school. This, like every other building, was protected by a high earthen wall. In the courtyard, boys were playing a kind of tennis.</p>
+<p>“China’s athletic awakening is the prerequisite for its national renewal,” the teacher lectured before leading us into the classrooms, whose earthen walls were bare and whose windows were pasted over with parchment. The desks were the same as in any country school in Europe. A timetable set out how much time the unfortunate Chinese pupils had to spend learning the six thousand characters required to at least be able to read a newspaper. (In order to understand a classical poem, however, they would have to master thirty thousand characters.) Instruction also encompassed the history of the Nationalist Party, the Kuomintang, and Doctor Sun Yat-sen’s famous Three Principles. In every room, hanging as the sole decoration, was his portrait, which, increasingly displacing the old images of gods, is also to be found in the yamen of every mandarin. I even saw it in isolated farmsteads beside the family altar.</p>
+<p>A young girl had approached us shyly. The teacher introduced her as the headmistress of the girls’ school and added that she wondered whether she might venture to ask us to pay her a visit. The rooms of the girls’ school were cramped, the broken desks jammed together, and the parchment of the windows hung down in tatters. The city fathers were little inclined to waste money on the education of girls. In her tidy, clean living room, the headmistress introduced us to her assistants, who likewise were dressed not in trousers—as befits women in the countryside—but in skirts. They spoke with great passion of their struggle against bound feet.</p>
+<p>“How is a woman who can move only with difficulty on stilts supposed to stand up for gender equality? How can . . .”</p>
+<p>Shouts interrupted her. The door flew open. The schoolmaster pounced on the intruder in a single bound. Teacups crashed to the floor. Women and children shrieked. Breathing heavily, the two men wrestled. Finally the schoolmaster managed to pin both arms of his opponent, who even now was trying to defend himself with his feet. It was a soldier. His cap lay on the floor and a knife at his feet. Someone picked it up.</p>
+<p>“This man,” he said with the smile that accompanied everything he said, “wanted to murder you.”</p>
+<p>The schoolmaster released the soldier, who embarrassedly put on his cap and asked for his knife back. He bowed low before us.</p>
+<p>“He took you for Japanese. Now that he sees you are white men, he begs your pardon.”</p>
+<p>The female teachers brought fresh teacups.</p>
+<p>“If only you would finally burn your brown windbreakers,” said Han.</p>
+<p>As the schoolmaster escorted us back to the yamen, he enthusiastically professed his nationalist creed. In modern China, the intellectual rarely has access to power. And yet an intellectual professional class is increasingly gaining influence over the fortunes of China, succeeding in gradually changing deep-rooted attitudes and customs. It is the class of the poorly paid, little-respected schoolteacher, such as is found in most villages and as a family employee in large farmsteads. Barely out of university, his head filled with grand plans for China’s renewal, he preaches to the peasant children that China is one nation, to which both Harbin and Canton belong. He depicts for them how intolerable the privileges of foreigners are and convinces them that it is the duty of youth to tear up the one-sided treaties with foreigners like scraps of paper. Following the teachings of Sun Yat-sen, which he himself has perhaps not fully understood, he seeks to awaken the Chinese masses, who have resigned themselves to the notion that politics is none of their business, to national consciousness. Relying on youth, he shapes public opinion despite the suspicion of the elderly. It is he who first makes any incident with a foreign state comprehensible to the people. He knows how to turn the aversion peasants feel toward all things foreign into hatred. When Japan marched into Manchuria, it was the schoolteacher who tried to fire up the indifferent peasants and timid shopkeepers to resist. Even though the new rulers of Manchuria have issued a decree forbidding all schools from continuing to disseminate the teachings of Sun Yat-sen, commanding them to teach the history of the imperial house of the Manchu and the life of Puyi instead of the history of the Kuomintang, the little schoolmaster continues to preach hatred against Japan. He is the fiercest enemy of the new state of Manchukuo, more dangerous than the rebel generals.</p>
+</div><div class="orig" lang="de"><div class="pbl">
+<a class="pb" id="opg1" href="https://tudigit.ulb.tu-darmstadt.de/show/Za-150-1934-4/0486" target="_blank" title="Scan 1" data-page="10">10</a>
+</div>
+<h1 id="zwischenfall-in-einer-mandschurischen-mädchenschule.">Zwischenfall in einer mandschurischen Mädchenschule.</h1>
+<h2 id="dieser-mann-wollte-mich-ermorden-es-war-nur-ein-mißverständnis.-nichts-besonderes-in-mandschukuo.">„Dieser Mann wollte mich ermorden!“ – Es war nur ein Mißverständnis. Nichts Besonderes in Mandschukuo.</h2>
+<p><em>Von A. R. Lindt.</em></p>
+<p>Der Schulmeister der Stadt, ein langhaariger Jüngling in blauem Rock, dem ein nagelneuer Strohhut westlicher Herkunft einen europäischen Anstrich verlieh, bat uns inständig, seine Schule zu besuchen. Diese, gleich jedem anderen Gebäude, war beschützt durch einen hohen Lehmwall. Im Hofe spielten Knaben eine Art Tennis.</p>
+<p>„Das sportliche Erwachen Chinas ist Voraussetzung für seine nationale Erneuerung“, dozierte der Lehrer, bevor er uns in die Schulräume führte, deren Erdwände kahl und deren Fenster mit Pergament verklebt waren. Die Pulte waren dieselben wie in jeder Landschule Europas. Ein Stundenplan bestimmte, wieviel Zeit die unglückseligen chinesischen Schüler auf das Erlernen der sechstausend Schriftzeichen zu verwenden hatten, deren Kenntnis nötig ist, um wenigstens eine Zeitung lesen zu können. (Damit sie aber ein klassisches Gedicht verstehen können, müßten sie dreißigtausend Schriftzeichen beherrschen.) Der Unterricht umfaßte auch die Geschichte der nationalistischen Partei der Kuomintang und die berühmten drei Grundsätze des Doktor Sun Yat-Sen. In jedem Zimmer hing als einziger Schmuck sein Bildnis, das immer mehr die alten Götterbilder verdrängend, auch im Jamen jedes Mandarins zu finden ist. Ich sah es sogar in einsamen Gehöften neben dem Familienaltare.</p>
+<p>Ein junges Mädchen hatte sich uns schüchtern genähert. Der Lehrer stellte es vor als die Vorsteherin der Mädchenschule und fügte bei, ob sie es wagen dürfte, uns um unsern Besuch zu bitten. Die Räume der Mädchenschule waren eng, die zerbrochenen Pulte ineinander gepfercht, und das Pergament der Fenster hing in Fetzen herunter. Die Stadtväter waren wenig geneigt, Geld an die Ausbildung von Mädchen zu vergeuden. Die Vorsteherin machte uns in ihrem ordentlichen, sauberen Wohnzimmer mit ihren Gehilfinnen bekannt, die ebenfalls nicht in Hosen – wie es sich für Frauen auf dem Lande ziemt –, sondern in Röcke gekleidet waren. Sie sprachen voll Feuer von ihrem Kampf gegen die gebundenen Füße.</p>
+<p>„Wie soll sich eine Frau, die sich nur mühsam auf Stelzen fortbewegen kann, für die Gleichberechtigung der Geschlechter einsetzen? Wie kann . . .“</p>
+<p>Geschrei unterbrach sie. Die Tür sprang auf. Der Schulmeister stürzte sich mit einem Satz auf den Eindringling. Teetassen klirrten zu Boden. Frauen und Kinder kreischten. Schwer atmend rangen die beiden Männer. Schließlich gelang es dem Schulmeister, beide Arme des Gegners zu umklammern, der sich auch jetzt noch mit seinen Füßen zu wehren suchte. Es war ein Soldat. Seine Mütze lag am Boden und ein Messer zu seinen Füßen. Man hob es auf.</p>
+<p>„Dieser Mann“, sagte er mit dem Lächeln, das jede seiner Reden begleitete, „wollte euch ermorden.“</p>
+<p>Der Schulmeister gab den Soldaten frei, der verlegen seine Mütze aufsetzte und sein Messer zurückerbat. Er verbeugte sich tief vor uns.</p>
+<p>„Er hielt euch für Japaner. Jetzt, wo er sieht, daß ihr weiße Männer seid, bittet er euch um Entschuldigung.“</p>
+<p>Die Lehrerinnen brachten neue Teetassen.</p>
+<p>„Wenn ihr nur endlich einmal eure braunen Windjacken verbrennen würdet“, sagte Han.</p>
+<p>Als der Schulmeister uns zum Jamen zurückgeleitete, legte er mit Begeisterung sein nationalistisches Glaubensbekenntnis ab. Im modernen China hat der Intellektuelle selten Zugang zur Macht. Und doch erlangt eine intellektuelle Berufsklasse in steigendem Maße Einfluß auf die Geschicke Chinas und vollbringt es, allmählich die alteingewurzelten Auffassungen und Gebräuche zu verändern. Es ist die Klasse des schlecht bezahlten, wenig angesehenen Schullehrers, wie er sich in den meisten Dörfern und als Angestellter der Familie in großen Gehöften findet. Kaum der Universität entwachsen, den Kopf angefüllt mit großen Plänen für die Erneuerung Chinas, predigt er den Bauernkindern, daß China eine Nation ist, der sowohl Charbin wie Kanton angehören. Er schildert ihnen, wie untragbar die Vorrechte der Fremden seien und überzeugt sie, daß es die Pflicht der Jugend ist, die einseitigen Verträge mit den Ausländern wie einen Papierfetzen zu zerreißen. Den Lehren Sun Yat-Sens folgend, die er vielleicht selbst nicht vollständig verstanden hat, will er die chinesischen Massen, die sich darein geschickt haben, daß Politik sie nichts angeht, zu nationalem Bewußtsein erwecken. Er schafft die öffentliche Meinung, trotz dem Argwohn der Alten, indem er sich auf die Jugend stützt. Jeden Zwischenfall mit einem ausländischen Staat macht er erst den Leuten verständlich. Er weiß die Abneigung, die die Bauern allem Fremden gegenüber verspüren, in Haß zu verwandeln. Als Japan in die Mandschurei einrückte, war es der Schullehrer, der die gleichgültigen Bauern und die furchtsamen Krämer zum Widerstand zu entflammen versuchte. Trotzdem die neuen Herrscher der Mandschurei ein Verbot an alle Schulen erlassen haben, weiterhin die Lehren Sun Yat-Sens zu verbreiten, und ihnen gebieten, statt der Geschichte der Kuomintang die Geschichte des Kaiserhauses des Mandschu und das Leben Pu Yis zu unterrichten, fährt der kleine Schulmeister fort, den Haß gegen Japan zu predigen. Er ist der heftigste Feind des neuen Staates Mandschukuo, gefährlicher als die aufständischen Generäle.</p>
+</div></section>
+<section class="row" id="c2"><div class="en" lang="en"><p>When our new horses were ready, the master of the merchants’ guild presented us with two tins: the peaches bore the label: Made in U. S. A., and the fish came from Japan.</p>
+<p>The hills ducked back into the plain, making room for the sky. (Taken, with the special permission of the publisher F. A. Brockhaus, Leipzig, from the just-published book <em>Im Sattel durch Mandschukuo</em> [In the Saddle Through Manchukuo] by A. R. Lindt.)</p>
+</div><div class="orig" lang="de"><p>Als unsere neuen Pferde bereitstanden, beschenkte uns der Gildenmeister der Kaufleute mit zwei Konservenbüchsen: Die Pfirsiche trugen den Vermerk: Made in U. S. A., und die Fische stammten aus Japan.</p>
+<p>Die Hügel duckten sich wieder in die Ebene zurück, dem Himmel Raum schaffend. (Mit besonderer Genehmigung des Verlages F. A. Brockhaus, Leipzig, dem soeben erschienenen Buch „Im Sattel durch Mandschukuo“ von A. R. Lindt, entnommen.)</p>
+</div></section>
+</main>
+<script>
+(function(){
+  var KEY="reader-lindt-1934", st={};
+  try{st=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  var root=document.documentElement, body=document.body;
+  function setView(v){body.dataset.view=v;st.view=v;save();
+    document.querySelectorAll("#viewSeg button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.v===v)});buildToc();}
+  document.querySelectorAll("#viewSeg button").forEach(function(b){b.onclick=function(){
+    var anchor=topRow(); setView(b.dataset.v); if(anchor) anchor.scrollIntoView();}});
+  function setPages(on){body.classList.toggle("nopages",!on);st.pages=on;save();
+    document.getElementById("pgBtn").setAttribute("aria-pressed",on);}
+  document.getElementById("pgBtn").onclick=function(){setPages(body.classList.contains("nopages"))};
+  function setFs(px){px=Math.max(14,Math.min(28,px));root.style.setProperty("--fs",px+"px");st.fs=px;save();}
+  document.getElementById("smaller").onclick=function(){setFs((st.fs||19)-1)};
+  document.getElementById("bigger").onclick=function(){setFs((st.fs||19)+1)};
+  document.getElementById("themeBtn").onclick=function(){
+    var dark=root.dataset.theme? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme=dark?"light":"dark";st.theme=root.dataset.theme;save();};
+  // contents
+  var toc=document.getElementById("toc"), scrim=document.getElementById("scrim");
+  function openToc(o){toc.classList.toggle("open",o);scrim.classList.toggle("open",o)}
+  document.getElementById("tocBtn").onclick=function(){openToc(!toc.classList.contains("open"))};
+  scrim.onclick=function(){openToc(false)};
+  function buildToc(){
+    var sel=body.dataset.view==="orig"?".orig":".en", list=document.getElementById("tocList"), n=0;
+    list.innerHTML="";
+    document.querySelectorAll(sel+" h1,"+sel+" h2,"+sel+" h3").forEach(function(h){
+      if(!h.id) h.id="h"+(++n)+sel.slice(1);
+      var a=document.createElement("a");a.href="#"+h.id;a.className="l"+h.tagName[1];
+      a.textContent=h.textContent;a.onclick=function(){openToc(false)};list.appendChild(a);});
+    if(!list.children.length) list.innerHTML='<p style="color:var(--muted)">No headings.</p>';
+  }
+  // go to printed page
+  function goPage(){var v=document.getElementById("pgIn").value.trim(); if(!v) return;
+    var sel=body.dataset.view==="orig"?".orig":".en";
+    var t=document.querySelector(sel+' .pb[data-page="'+v+'"]')||document.querySelector('.pb[data-page="'+v+'"]')
+      ||document.querySelector(sel+' .pb[data-page="['+v+']"]');
+    if(t){openToc(false);if(body.classList.contains("nopages"))setPages(true);
+      t.scrollIntoView({block:"center"});}
+    else alert("Page "+v+" not found");}
+  document.getElementById("pgGo").onclick=goPage;
+  document.getElementById("pgIn").onkeydown=function(e){if(e.key==="Enter")goPage()};
+  // reading position + progress
+  var rows=[].slice.call(document.querySelectorAll(".row"));
+  function topRow(){for(var i=0;i<rows.length;i++){if(rows[i].getBoundingClientRect().bottom>80) return rows[i];}return null}
+  var prog=document.getElementById("prog"), tick=false;
+  addEventListener("scroll",function(){if(tick)return;tick=true;requestAnimationFrame(function(){tick=false;
+    var h=document.documentElement.scrollHeight-innerHeight; prog.style.width=(h>0?scrollY/h*100:0)+"%";
+    var r=topRow(); if(r&&r.id!==st.pos){st.pos=r.id;save();}});},{passive:true});
+  var qv=null;try{qv=new URLSearchParams(location.search).get("view")}catch(e){}
+  setView(body.classList.contains("mono")?"en":/^(en|orig|par)$/.test(qv||"")?qv:(st.view||"en")); setPages(st.pages!==false); if(st.fs) setFs(st.fs); if(st.theme) root.dataset.theme=st.theme;
+  if(!location.hash && st.pos){var r=document.getElementById(st.pos); if(r && r!==rows[0]) r.scrollIntoView();}
+})();
+</script>
+</body>
+</html>

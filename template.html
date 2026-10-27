@@ -47,6 +47,9 @@ header.cover h1{font-size:2.1rem;line-height:1.25;margin:0 0 .4rem;font-weight:6
 header.cover .orig-title{font-family:var(--cjk),var(--serif);color:var(--muted);font-size:1.2rem}
 header.cover .author{margin-top:.8rem;font-style:italic}
 header.cover .stats{margin-top:1.2rem;color:var(--muted);font:13px var(--sans)}
+header.cover .cite{margin-top:1rem;font-size:.9rem}
+header.cover .cite a{color:inherit}
+header.cover .cite:empty{display:none}
 header.cover .note{margin-top:1rem;color:var(--muted);font-size:.9rem}
 /* text */
 main{padding:0 16px 6rem}
@@ -132,6 +135,7 @@ nav.toc input{flex:1;font:inherit;padding:.3rem .5rem;border:1px solid var(--rul
   <div class="orig-title" lang="{{LANG}}">{{TITLE_ORIG}}</div>
   <div class="author">{{AUTHOR}}</div>
   <div class="note">{{NOTE}}</div>
+  <div class="cite">{{CITATION}}</div>
   <div class="stats">{{STATS}}</div>
 </header>
 <main id="text">
